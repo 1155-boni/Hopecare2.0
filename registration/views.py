@@ -45,3 +45,8 @@ def sign_in(request):
 def sign_out(request):
     logout(request)
     return redirect('home')
+
+def home(request):
+    if not request.user.is_authenticated:
+        return redirect('sign_in')
+    return render(request, 'home.html', {'user': request.user})
