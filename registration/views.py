@@ -44,9 +44,15 @@ def sign_in(request):
     return render(request, 'login.html')
 def sign_out(request):
     logout(request)
-    return redirect('home')
+    return redirect('landing')
 
 def home(request):
     if not request.user.is_authenticated:
         return redirect('sign_in')
     return render(request, 'home.html', {'user': request.user})
+
+def landing(request):
+    """Public landing page - accessible to all users"""
+    if request.user.is_authenticated:
+        return redirect('home')
+    return render(request, 'landing.html')
