@@ -1,7 +1,14 @@
-# TODO - Fix 500 Internal Server Error
+# TODO - Landing Page Implementation
 
 ## Plan:
-- [x] 1. Update Hopecare/urls.py to include registration and api URLs
-- [x] 2. Update settings.py to fix TEMPLATES DIRS and STATICFILES_DIRS
-- [x] 3. Create templates directory structure
+- [x] 1. Create landing.html template with hero section, features, and CTAs
+- [x] 2. Add landing view in registration/views.py
+- [x] 3. Update registration/urls.py - route root to landing page
+- [x] 4. Update home view to redirect to /home/ for authenticated users
+
+## Changes:
+- templates/landing.html (new file) ✓
+- registration/views.py (add landing view, update home redirect) ✓
+- registration/urls.py (update URL routing) ✓
+- templates/home.html (add navigation link) ✓
 
