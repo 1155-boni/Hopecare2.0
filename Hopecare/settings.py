@@ -138,5 +138,5 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
     
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/login/'
-LOGINT_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/sign_in/'
