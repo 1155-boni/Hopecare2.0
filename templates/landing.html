@@ -296,6 +296,75 @@
             color: #7b1fa2;
         }
         
+        /* What We Do Section */
+        .what-we-do {
+            padding: 5rem 5%;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .what-we-do-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .what-we-do h4 {
+            font-size: 1.5rem;
+            color: #e53935; /* Red */
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        
+        .what-we-do h1 {
+            font-size: 2.5rem;
+            color: #1a237e; /* Navy Blue */
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        
+        .what-we-do p {
+            font-size: 1.1rem;
+            color: #7b1fa2; /* Purple */
+            line-height: 1.8;
+        }
+        
+        .what-we-do-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            height: 400px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed #1a237e;
+        }
+        
+        .what-we-do-image span {
+            color: #1a237e;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .what-we-do {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .what-we-do-image {
+                width: 100%;
+            }
+        }
+        
         /* Footer */
         footer {
             background-color: #1b5e20;
@@ -373,6 +442,17 @@
                 <a href="{% url 'sign_up' %}" class="btn btn-primary">Join Us</a>
                 <a href="{% url 'features' %}" class="btn btn-secondary">Learn More</a>
             </div>
+        </div>
+    </section>
+    <!-- What We Do Section -->
+    <section class="what-we-do">
+        <div class="what-we-do-content">
+            <h4>What we do.</h4>
+            <h1>We are on a mission</h1>
+            <p>To provide dedicated and comprehensive care and support for children in need, ensuring their physical, emotional and educational well-being.</p>
+        </div>
+        <div class="what-we-do-image">
+            <span>Photo Placeholder</span>
         </div>
     </section>
 
