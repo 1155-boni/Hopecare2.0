@@ -140,18 +140,23 @@
         
         .hero h1 {
             font-size: 3.5rem;
-            color: #1b5e20;
+            color: #e53935;
             margin-bottom: 1.5rem;
             line-height: 1.2;
         }
         
         .hero p {
             font-size: 1.25rem;
-            color: #555;
+            color: #7b1fa2;
             margin-bottom: 2.5rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+        }
+        
+        .hero .keyword {
+            color: #1a237e;
+            font-weight: bold;
         }
         
         .hero-buttons {
@@ -203,7 +208,7 @@
         .features h2 {
             text-align: center;
             font-size: 2.5rem;
-            color: #1b5e20;
+            color: #e53935;
             margin-bottom: 3rem;
         }
         
@@ -265,14 +270,30 @@
         
         .about h2 {
             font-size: 2.5rem;
-            color: #1b5e20;
+            color: #e53935;
             margin-bottom: 1.5rem;
         }
         
         .about p {
             font-size: 1.1rem;
-            color: #555;
+            color: #7b1fa2;
             margin-bottom: 2rem;
+        }
+        
+        /* Keyword highlight */
+        .keyword {
+            color: #1a237e;
+            font-weight: bold;
+        }
+        
+        /* Section titles */
+        h2.title, h3.title {
+            color: #e53935;
+        }
+        
+        /* Normal text */
+        p, li, span.text {
+            color: #7b1fa2;
         }
         
         /* Footer */
@@ -341,12 +362,12 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Dignity
-                Integrity
-                Sacrifice
-                Compassion
+            <h1 class="title"><span class="keyword">Dignity</span>
+                <span class="keyword">Integrity</span>
+                <span class="keyword">Sacrifice</span>
+                <span class="keyword">Compassion</span>
             </h1>
-            <p>Hopecare Restores and handles children with Dignity in everything above reproach. Serving with the
+            <p>Hopecare Restores and handles children with <span class="keyword">Dignity</span> in everything above reproach. Serving with the
                 heart of God, whatever the cost and walking children in the path of redemption.</p>
             <div class="hero-buttons">
                 <a href="{% url 'sign_up' %}" class="btn btn-primary">Join Us</a>
