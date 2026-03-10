@@ -332,8 +332,8 @@
     <nav>
         <a href="{% url 'landing' %}" class="logo">Hopecare</a>
         <div class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#about">About</a>
+            <a href="{% url 'features' %}">Features</a>
+            <a href="{% url 'about' %}">About</a>
             <a href="{% url 'sign_in' %}" class="btn-signin">Sign In</a>
         </div>
     </nav>
@@ -350,55 +350,8 @@
                 heart of God, whatever the cost and walking children in the path of redemption.</p>
             <div class="hero-buttons">
                 <a href="{% url 'sign_up' %}" class="btn btn-primary">Join Us</a>
-                <a href="#features" class="btn btn-secondary">Learn More</a>
+                <a href="{% url 'features' %}" class="btn btn-secondary">Learn More</a>
             </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <h2>Why Choose Our Children's Home?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🏠</div>
-                <h3>Safe & Nurturing Environment</h3>
-                <p>We provide a loving, secure, and family-like atmosphere where every child feels safe, valued, and at home.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3>Educational Support</h3>
-                <p>Our dedicated tutors and educational programs help every child excel academically and reach their full potential.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">👨‍⚕️</div>
-                <h3>Healthcare & Medical Care</h3>
-                <p>Regular health check-ups, medical care, and access to healthcare professionals ensure every child's well-being.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🍎</div>
-                <h3>Nutritious Meals</h3>
-                <p>Balanced, healthy meals are provided daily to support proper growth and development of every child.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💚</div>
-                <h3>Counseling & Emotional Support</h3>
-                <p>Professional counselors provide emotional support and trauma-informed care to help children heal and thrive.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🕐</div>
-                <h3>24/7 Qualified Caregivers</h3>
-                <p>Our trained and compassionate staff are available around the clock to provide love, care, and support.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-content">
-            <h2>About Hopecare</h2>
-            <p>Hopecare is a children's home dedicated to restoring and caring for children with dignity, regardless of their past. We serve with the heart of God, walking alongside every child in their path to redemption.</p>
-            <p>Our mission is to provide a safe, nurturing environment where every child can experience love, healing, and the opportunity to reach their full potential. We believe in treating each child with integrity and compassion, helping them build a brighter future.</p>
-            <a href="{% url 'sign_up' %}" class="btn btn-primary">Join Us Today</a>
         </div>
     </section>
 
