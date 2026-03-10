@@ -56,3 +56,11 @@ def landing(request):
     if request.user.is_authenticated:
         return redirect('home')
     return render(request, 'landing.html')
+
+def features(request):
+    """Features page - accessible to all users"""
+    return render(request, 'features.html')
+
+def about(request):
+    """About page - accessible to all users"""
+    return render(request, 'about.html')
