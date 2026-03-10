@@ -1,19 +1,29 @@
-# TODO: Style "What we do" Section
+# TODO: Add About Page Dropdown
 
-## Task: Style the div with "What we do" with red navy blue and purple colors and space left for a photo on the right
+## Task: Add dropdown menu to About page with Who We Are, What We Do, Our Core, and Our Team
 
 ### Steps:
-1. [x] Add CSS styles for the "What we do" section in landing.html
-   - Create `.what-we-do` section class with proper padding and background
-   - Add two-column flexbox layout (text on left, image space on right)
-   - Apply red (#e53935), navy blue (#1a237e), and purple (#7b1fa2) colors
-   - Add responsive styles for mobile
+1. [x] Add new views in registration/views.py
+   - who_we_are
+   - what_we_do
+   - our_core
+   - our_team
 
-2. [x] Update HTML structure
-   - Convert the simple div to a proper section element
-   - Add left content div with text
-   - Add right content div with placeholder for photo
-   - Apply proper class names
+2. [x] Add new URL patterns in registration/urls.py
+   - /who_we_are/
+   - /what_we_do/
+   - /our_core/
+   - /our_team/
 
-3. [x] Verify changes work correctly
+3. [x] Update about.html with dropdown menu
+   - Add dropdown CSS styles
+   - Add dropdown HTML structure in navigation
+
+4. [x] Create new template files
+   - who_we_are.html (with images)
+   - what_we_do.html (with images)
+   - our_core.html (with images)
+   - our_team.html (with images)
+
+5. [x] Add images to all pages from Unsplash
 
