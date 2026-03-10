@@ -64,3 +64,19 @@ def features(request):
 def about(request):
     """About page - accessible to all users"""
     return render(request, 'about.html')
+
+def who_we_are(request):
+    """Who We Are page - accessible to all users"""
+    return render(request, 'who_we_are.html')
+
+def what_we_do(request):
+    """What We Do page - accessible to all users"""
+    return render(request, 'what_we_do.html')
+
+def our_core(request):
+    """Our Core page - accessible to all users"""
+    return render(request, 'our_core.html')
+
+def our_team(request):
+    """Our Team page - accessible to all users"""
+    return render(request, 'our_team.html')
