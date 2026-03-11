@@ -1,149 +1,686 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Hopecare</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Volunteer Application - Step {{ step }} - Hopecare{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Form Container */
+    .form-page {
+        padding: 8rem 5% 5rem;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    }
+    
+    .form-wrapper {
+        width: 100%;
+        max-width: 600px;
+        background: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .form-wrapper h1 {
+        color: #e53935;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    
+    .form-subtitle {
+        text-align: center;
+        color: #7b1fa2;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    /* Progress Bar */
+    .progress-container {
+        margin-bottom: 2rem;
+    }
+    
+    .progress-bar {
+        width: 100%;
+        height: 10px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background-color: #2e7d32;
+        transition: width 0.3s ease;
+    }
+    
+    .progress-text {
+        text-align: center;
+        margin-top: 0.5rem;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    /* Step Indicator */
+    .step-indicator {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+    }
+    
+    .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+    }
+    
+    .step-number {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #e0e0e0;
+        color: #666;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .step.active .step-number {
+        background-color: #2e7d32;
+        color: white;
+    }
+    
+    .step.completed .step-number {
+        background-color: #4caf50;
+        color: white;
+    }
+    
+    .step-label {
+        font-size: 0.75rem;
+        color: #666;
+        text-align: center;
+    }
+    
+    .step.active .step-label {
+        color: #2e7d32;
+        font-weight: 600;
+    }
+    
+    .step-connector {
+        flex: 0.3;
+        height: 2px;
+        background-color: #e0e0e0;
+        margin-top: 15px;
+    }
+    
+    .step.completed + .step-connector,
+    .step.completed + .step-connector + .step.completed .step-connector {
+        background-color: #4caf50;
+    }
+    
+    /* Confidential Notice */
+    .confidential-notice {
+        background-color: #fff3e0;
+        border-left: 4px solid #ff9800;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+    }
+    
+    .confidential-notice h3 {
+        color: #e65100;
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+    }
+    
+    .confidential-notice p {
+        color: #666;
+        margin: 0;
+        font-size: 0.9rem;
+    }
+    
+    /* Form Fields */
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .form-group label.required::after {
+        content: " *";
+        color: #e53935;
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: border-color 0.3s;
+    }
+    
+    .form-group textarea {
+        resize: vertical;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #2e7d32;
+    }
+    
+    .form-group .help-text {
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 0.25rem;
+    }
+    
+    /* Radio Buttons */
+    .radio-group {
+        display: flex;
+        gap: 2rem;
+        margin-top: 0.5rem;
+    }
+    
+    .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .radio-option input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #2e7d32;
+    }
+    
+    .radio-option label {
+        margin: 0;
+        font-weight: normal;
+    }
+    
+    /* Conditional Fields */
+    .conditional-field {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        border-left: 4px solid #2e7d32;
+    }
+    
+    .conditional-field.show {
+        display: block;
+    }
+    
+    /* Checkbox */
+    .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        accent-color: #2e7d32;
+        margin-top: 0.2rem;
+    }
+    
+    .checkbox-group label {
+        font-weight: normal;
+        line-height: 1.4;
+    }
+    
+    /* Buttons */
+    .btn-row {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .btn-submit {
+        flex: 1;
+        padding: 1rem;
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .btn-submit:hover {
+        background-color: #1b5e20;
+    }
+    
+    .btn-secondary {
+        padding: 1rem 2rem;
+        background-color: #757575;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+    
+    .btn-secondary:hover {
+        background-color: #616161;
+    }
+    
+    /* Error Messages */
+    .error {
+        color: #e53935;
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        background-color: #ffebee;
+        border-radius: 5px;
+        text-align: center;
+    }
+    
+    /* Navigation Links */
+    .form-links {
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+    
+    .form-links a {
+        color: #2e7d32;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .form-links a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Form Row */
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    
+    @media (max-width: 600px) {
+        .form-row {
+            grid-template-columns: 1fr;
         }
-        .container {
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        .form-container {
-            background-color: #f0f0f0;
-            padding: 30px;
-            border-radius: 5px;
-            margin: 20px 0;
-            text-align: left;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .error {
-            color: red;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #ffdddd;
-            border-radius: 5px;
-        }
-        .links {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .links a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .links a:hover {
-            text-decoration: underline;
-        }
-        .helptext {
-            font-size: 12px;
-            color: #666;
-            margin-top: 5px;
-        }
-        .errorlist {
-            color: red;
-            list-style: none;
-            padding: 0;
-            margin: 5px 0;
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Sign Up for Hopecare</h1>
         
+        .radio-group {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .step-indicator {
+            display: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-wrapper">
+        <!-- Confidential Notice -->
+        <div class="confidential-notice">
+            <h3>We need your help!</h3>
+            <p>All information gathered will be kept confidential and will be used only by Hope Care Center. Please print clearly.</p>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ progress }}%;"></div>
+            </div>
+            <p class="progress-text">Step {{ step }} of {{ total_steps }}</p>
+        </div>
+        
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step {% if step >= 1 %}active{% endif %} {% if step > 1 %}completed{% endif %}">
+                <div class="step-number">1</div>
+                <div class="step-label">Account</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step {% if step >= 2 %}active{% endif %} {% if step > 2 %}completed{% endif %}">
+                <div class="step-number">2</div>
+                <div class="step-label">History</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step {% if step >= 3 %}active{% endif %} {% if step > 3 %}completed{% endif %}">
+                <div class="step-number">3</div>
+                <div class="step-label">Referral</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step {% if step >= 4 %}active{% endif %} {% if step > 4 %}completed{% endif %}">
+                <div class="step-number">4</div>
+                <div class="step-label">Why Us</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step {% if step >= 5 %}active{% endif %} {% if step > 5 %}completed{% endif %}">
+                <div class="step-number">5</div>
+                <div class="step-label">Interest</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step {% if step >= 6 %}active{% endif %} {% if step > 6 %}completed{% endif %}">
+                <div class="step-number">6</div>
+                <div class="step-label">Time</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step {% if step >= 7 %}active{% endif %} {% if step > 7 %}completed{% endif %}">
+                <div class="step-number">7</div>
+                <div class="step-label">Work</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step {% if step >= 8 %}active{% endif %}">
+                <div class="step-number">8</div>
+                <div class="step-label">Skills</div>
+            </div>
+        </div>
+        
+        <!-- Step Title -->
+        <h1>
+            {% if step == 1 %}Create Your Account
+            {% elif step == 2 %}Previous Connection to Hopecare
+            {% elif step == 3 %}How Did You Hear About Us
+            {% elif step == 4 %}Your Motivation
+            {% elif step == 5 %}Volunteer Interests
+            {% elif step == 6 %}Your Availability
+            {% elif step == 7 %}Employment Status
+            {% elif step == 8 %}Skills & Certification
+            {% endif %}
+        </h1>
+        
+        <p class="form-subtitle">
+            {% if step == 1 %}Create your login credentials
+            {% elif step == 2 %}Have you ever been employed by, or volunteered with, Hopecare Center?
+            {% elif step == 3 %}How did you hear about the volunteer program at Hopecare Center?
+            {% elif step == 4 %}Describe your main reasons for wanting to volunteer
+            {% elif step == 5 %}Indicate the type of volunteer work that interests you
+            {% elif step == 6 %}What is your availability
+            {% elif step == 7 %}Are you currently employed?
+            {% elif step == 8 %}Special skills, training or qualifications & Certification
+            {% endif %}
+        </p>
+        
+        <!-- Form Errors -->
         {% if errors %}
         <div class="error">
             {% for field, error_list in errors.items %}
                 {% for error in error_list %}
-                    <p class="errorlist">{{ error }}</p>
+                    <p>{{ error }}</p>
                 {% endfor %}
             {% endfor %}
         </div>
         {% endif %}
         
-        <div class="form-container">
-            <form method="post">
-                {% csrf_token %}
+        <!-- Form -->
+        <form method="post">
+            {% csrf_token %}
+            
+            {% if step == 1 %}
+            <!-- Step 1: Account Information -->
+            <div class="form-row">
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    {{ form.username }}
-                    {% if form.username.help_text %}
-                    <p class="helptext">{{ form.username.help_text }}</p>
-                    {% endif %}
+                    <label for="id_first_name" class="required">First Name</label>
+                    {{ form.first_name }}
                 </div>
+                
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    {{ form.email }}
+                    <label for="id_last_name" class="required">Last Name</label>
+                    {{ form.last_name }}
                 </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="id_phone_number" class="required">Phone Number</label>
+                {{ form.phone_number }}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_username" class="required">Username</label>
+                {{ form.username }}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_email" class="required">Email Address</label>
+                {{ form.email }}
+            </div>
+            
+            <div class="form-row">
                 <div class="form-group">
-                    <label for="password1">Password</label>
+                    <label for="id_password1" class="required">Password</label>
                     {{ form.password1 }}
-                    {% if form.password1.help_text %}
-                    <p class="helptext">{{ form.password1.help_text }}</p>
-                    {% endif %}
                 </div>
+                
                 <div class="form-group">
-                    <label for="password2">Confirm Password</label>
+                    <label for="id_password2" class="required">Confirm Password</label>
                     {{ form.password2 }}
-                    {% if form.password2.help_text %}
-                    <p class="helptext">{{ form.password2.help_text }}</p>
-                    {% endif %}
                 </div>
-                <button type="submit" class="btn">Sign Up</button>
-            </form>
-        </div>
+            </div>
+            
+            {% elif step == 2 %}
+            <!-- Step 2: Previous Connection -->
+            <div class="form-group">
+                <label class="required">Have you ever been employed by, or volunteered with, Hopecare Center?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="employed_no" name="employed_or_volunteered_before" value="No" {% if form.employed_or_volunteered_before.value == 'No' or not form.employed_or_volunteered_before.value %}checked{% endif %}>
+                        <label for="employed_no">No</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="employed_yes" name="employed_or_volunteered_before" value="Yes" {% if form.employed_or_volunteered_before.value == 'Yes' %}checked{% endif %}>
+                        <label for="employed_yes">Yes</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="conditional-field" id="hopecare_details_field">
+                <div class="form-group">
+                    <label for="id_hopecare_employment_details">If yes, please specify where, when, and your position or role</label>
+                    {{ form.hopecare_employment_details }}
+                </div>
+            </div>
+            
+            {% elif step == 3 %}
+            <!-- Step 3: How did you hear -->
+            <div class="form-group">
+                <label for="id_how_did_you_hear" class="required">How did you hear about the volunteer program at Hopecare Center?</label>
+                {{ form.how_did_you_hear }}
+            </div>
+            
+            <div class="conditional-field" id="hear_other_field">
+                <div class="form-group">
+                    <label for="id_how_did_you_hear_other">Please specify</label>
+                    {{ form.how_did_you_hear_other }}
+                </div>
+            </div>
+            
+            {% elif step == 4 %}
+            <!-- Step 4: Motivation -->
+            <div class="form-group">
+                <label for="id_reasons_for_volunteering" class="required">Describe your main reasons for wanting to volunteer</label>
+                {{ form.reasons_for_volunteering }}
+                <p class="help-text">Tell us what motivates you to volunteer with Hopecare</p>
+            </div>
+            
+            {% elif step == 5 %}
+            <!-- Step 5: Volunteer Interests -->
+            <div class="form-group">
+                <label for="id_volunteer_interest" class="required">Type of volunteer work that interests you</label>
+                {{ form.volunteer_interest }}
+            </div>
+            
+            <div class="conditional-field" id="volunteer_other_field">
+                <div class="form-group">
+                    <label for="id_volunteer_interest_other">Please specify</label>
+                    {{ form.volunteer_interest_other }}
+                </div>
+            </div>
+            
+            {% elif step == 6 %}
+            <!-- Step 6: Availability -->
+            <div class="form-group">
+                <label for="id_availability" class="required">What is your availability?</label>
+                {{ form.availability }}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_availability_details">Additional availability details (optional)</label>
+                {{ form.availability_details }}
+            </div>
+            
+            {% elif step == 7 %}
+            <!-- Step 7: Employment Status -->
+            <div class="form-group">
+                <label for="id_employment_status" class="required">Are you currently employed?</label>
+                {{ form.employment_status }}
+            </div>
+            
+            <div class="conditional-field" id="employment_details_field">
+                <div class="form-group">
+                    <label for="id_employment_details">Please provide your employer name and job title</label>
+                    {{ form.employment_details }}
+                </div>
+            </div>
+            
+            {% elif step == 8 %}
+            <!-- Step 8: Skills and Certification -->
+            <div class="form-group">
+                <label for="id_special_skills" class="required">Special skills, training or qualifications you would like to use in your volunteer role</label>
+                {{ form.special_skills }}
+                <p class="help-text">List any relevant skills, certifications, training, or experience</p>
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox-group">
+                    {{ form.certification }}
+                    <label for="id_certification">I certify that the information in this application is correct and complete to the best of my knowledge.</label>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Navigation Buttons -->
+            <div class="btn-row">
+                {% if step > 1 %}
+                <a href="{% url 'volunteer_register_step' step=step|add:'-1' %}" class="btn-secondary">Previous</a>
+                {% endif %}
+                
+                {% if step < 8 %}
+                <button type="submit" class="btn-submit">Next Step</button>
+                {% else %}
+                <button type="submit" class="btn-submit">Submit Application</button>
+                {% endif %}
+            </div>
+        </form>
         
-        <div class="links">
+        <div class="form-links">
             <p>Already have an account? <a href="{% url 'sign_in' %}">Sign In</a></p>
-            <p style="margin-top: 10px;">
-                <a href="{% url 'features' %}">Features</a> | 
-                <a href="{% url 'about' %}">About</a> | 
-                <a href="{% url 'landing' %}">Home</a>
-            </p>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle conditional field visibility for employed/volunteered before (Step 2)
+        const employedYes = document.getElementById('employed_yes');
+        const employedNo = document.getElementById('employed_no');
+        const hopecareDetails = document.getElementById('hopecare_details_field');
+        
+        function toggleHopecareDetails() {
+            if (employedYes && employedYes.checked) {
+                hopecareDetails.classList.add('show');
+            } else {
+                hopecareDetails.classList.remove('show');
+            }
+        }
+        
+        if (employedYes) employedYes.addEventListener('change', toggleHopecareDetails);
+        if (employedNo) employedNo.addEventListener('change', toggleHopecareDetails);
+        
+        // Initial check for Step 2
+        toggleHopecareDetails();
+        
+        // Handle "how did you hear" other field (Step 3)
+        const hearSelect = document.getElementById('id_how_did_you_hear');
+        const hearOther = document.getElementById('hear_other_field');
+        
+        function toggleHearOther() {
+            if (hearSelect && hearSelect.value === 'other') {
+                hearOther.classList.add('show');
+            } else {
+                hearOther.classList.remove('show');
+            }
+        }
+        
+        if (hearSelect) {
+            hearSelect.addEventListener('change', toggleHearOther);
+            // Initial check for Step 3
+            toggleHearOther();
+        }
+        
+        // Handle volunteer interest other field (Step 5)
+        const interestSelect = document.getElementById('id_volunteer_interest');
+        const interestOther = document.getElementById('volunteer_other_field');
+        
+        function toggleInterestOther() {
+            if (interestSelect && interestSelect.value === 'other') {
+                interestOther.classList.add('show');
+            } else {
+                interestOther.classList.remove('show');
+            }
+        }
+        
+        if (interestSelect) {
+            interestSelect.addEventListener('change', toggleInterestOther);
+            // Initial check for Step 5
+            toggleInterestOther();
+        }
+        
+        // Handle employment status details (Step 7)
+        const employmentSelect = document.getElementById('id_employment_status');
+        const employmentDetails = document.getElementById('employment_details_field');
+        
+        function toggleEmploymentDetails() {
+            if (employmentSelect && (employmentSelect.value === 'employed' || employmentSelect.value === 'self_employed')) {
+                employmentDetails.classList.add('show');
+            } else {
+                employmentDetails.classList.remove('show');
+            }
+        }
+        
+        if (employmentSelect) {
+            employmentSelect.addEventListener('change', toggleEmploymentDetails);
+            // Initial check for Step 7
+            toggleEmploymentDetails();
+        }
+    });
+</script>
+{% endblock %}
 
