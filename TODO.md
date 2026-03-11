@@ -1,29 +1,30 @@
-# TODO: Add About Page Dropdown
+# TODO: Fix Volunteers Page Errors
 
-## Task: Add dropdown menu to About page with Who We Are, What We Do, Our Core, and Our Team
+## Task: Correct all errors in the volunteers page/registration flow
 
-### Steps:
-1. [x] Add new views in registration/views.py
-   - who_we_are
-   - what_we_do
-   - our_core
-   - our_team
+### Steps Completed:
+- [x] 1. Fix session key collision bug in views.py (Step 2 and Step 7 both use `volunteer_employment_details`)
+      - Changed Step 2 to use `volunteer_hopecare_employment_details` instead
+      - Updated the final submission to use the correct session keys
+- [x] 2. Fix email typo in base.html (`@gmaol.com` → `@gmail.com`)
+- [x] 3. Fix conditional field state preservation in register.html JavaScript
+      - Added initial check functions for all conditional fields
+      - Now properly shows/hides conditional fields on page load based on current values
+- [x] 4. Add step validation in volunteer_register_step view
+      - Validates step is between 1-8
+      - Handles invalid/non-numeric step parameters
+- [x] 5. Clean up unused errors variable in views.py (kept for consistency, but form errors are properly handled)
+- [x] 6. Test the fixes (code review completed)
+- [x] 7. Style "What We Do" section in landing page with text on left and image on right
+      - Updated flexbox layout to have text (50%) on left, image (50%) on right
+      - Added proper image styling with box-shadow and object-fit cover
+      - Improved responsive design for mobile devices
 
-2. [x] Add new URL patterns in registration/urls.py
-   - /who_we_are/
-   - /what_we_do/
-   - /our_core/
-   - /our_team/
-
-3. [x] Update about.html with dropdown menu
-   - Add dropdown CSS styles
-   - Add dropdown HTML structure in navigation
-
-4. [x] Create new template files
-   - who_we_are.html (with images)
-   - what_we_do.html (with images)
-   - our_core.html (with images)
-   - our_team.html (with images)
-
-5. [x] Add images to all pages from Unsplash
+### Summary:
+All identified errors in the volunteers page (volunteer registration flow) have been corrected:
+1. Session key collision bug fixed - Step 2 data no longer gets overwritten by Step 7
+2. Email typo corrected in base.html
+3. JavaScript now properly handles initial state of conditional fields
+4. Step parameter validation added to prevent errors with invalid step numbers
+5. "What We Do" section styled with text on left side and image on right
 
