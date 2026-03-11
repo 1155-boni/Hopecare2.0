@@ -1,85 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - Hopecare</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-        .container {
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        .form-container {
-            background-color: #f0f0f0;
-            padding: 30px;
-            border-radius: 5px;
-            margin: 20px 0;
-            text-align: left;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .error {
-            color: red;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #ffdddd;
-            border-radius: 5px;
-        }
-        .links {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .links a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .links a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Sign In to Hopecare</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign In - Hopecare{% endblock %}
+
+{% block hero_slides %}
+<!-- Slide 1: Sign In -->
+<div class="hero-slide active" style="background-image: url('{% static 'images/hero1.jpg' %}');">
+    <div class="hero-content">
+        <h1 class="title">Welcome <span class="keyword">Back</span></h1>
+        <p>Sign in to access your dashboard and stay connected with Hopecare's mission.</p>
+    </div>
+</div>
+<!-- Slide 2 -->
+<div class="hero-slide" style="background-image: url('{% static 'images/hero2.jpg' %}');">
+    <div class="hero-content">
+        <h1 class="title">Join Our <span class="keyword">Community</span></h1>
+        <p>Sign in to get involved and make a difference in children's lives.</p>
+    </div>
+</div>
+<!-- Slide 3 -->
+<div class="hero-slide" style="background-image: url('{% static 'images/hero3.jpg' %}');">
+    <div class="hero-content">
+        <h1 class="title">Stay <span class="keyword">Connected</span></h1>
+        <p>Sign in to receive updates and news about our programs and events.</p>
+    </div>
+</div>
+<!-- Slide 4 -->
+<div class="hero-slide" style="background-image: url('{% static 'images/hero4.jpg' %}');">
+    <div class="hero-content">
+        <h1 class="title">Support Our <span class="keyword">Mission</span></h1>
+        <p>Your involvement helps us provide better care for children in need.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Form Container */
+    .form-page {
+        padding: 8rem 5% 5rem;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    }
+    
+    .form-wrapper {
+        width: 100%;
+        max-width: 450px;
+        background: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    
+    .form-wrapper h1 {
+        color: #e53935;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    
+    .form-subtitle {
+        text-align: center;
+        color: #7b1fa2;
+        margin-bottom: 2rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+    
+    .form-group input:focus {
+        outline: none;
+        border-color: #2e7d32;
+    }
+    
+    .btn-submit {
+        width: 100%;
+        padding: 1rem;
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .btn-submit:hover {
+        background-color: #1b5e20;
+    }
+    
+    .error {
+        color: #e53935;
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        background-color: #ffebee;
+        border-radius: 5px;
+        text-align: center;
+    }
+    
+    .form-links {
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+    
+    .form-links a {
+        color: #2e7d32;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .form-links a:hover {
+        text-decoration: underline;
+    }
+    
+    .nav-links-form {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .nav-links-form a {
+        color: #7b1fa2;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+    
+    .nav-links-form a:hover {
+        color: #2e7d32;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="form-wrapper">
+        <h1>Sign In</h1>
+        <p class="form-subtitle">Welcome back to Hopecare Center</p>
         
         {% if error %}
         <div class="error">
@@ -87,30 +165,31 @@
         </div>
         {% endif %}
         
-        <div class="form-container">
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password1">Password</label>
-                    <input type="password" name="password1" id="password1" required>
-                </div>
-                <button type="submit" class="btn">Sign In</button>
-            </form>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit" class="btn-submit">Sign In</button>
+        </form>
+        
+        <div class="form-links">
+            <p>Don't have an account? <a href="{% url 'sign_up' %}">Sign Up</a></p>
         </div>
         
-        <div class="links">
-            <p>Don't have an account? <a href="{% url 'sign_up' %}">Sign Up</a></p>
-            <p style="margin-top: 10px;">
-                <a href="{% url 'features' %}">Features</a> | 
-                <a href="{% url 'about' %}">About</a> | 
-                <a href="{% url 'landing' %}">Home</a>
-            </p>
+        <div class="nav-links-form">
+            <a href="{% url 'features' %}">Features</a>
+            <span>|</span>
+            <a href="{% url 'about' %}">About</a>
+            <span>|</span>
+            <a href="{% url 'landing' %}">Home</a>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
 
