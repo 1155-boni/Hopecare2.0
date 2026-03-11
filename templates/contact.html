@@ -1,0 +1,347 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact & Volunteer - Hopecare Center{% endblock %}
+
+{% block nav_about %}
+<div class="dropdown">
+    <a href="{% url 'about' %}">About</a>
+    <div class="dropdown-content">
+        <a href="{% url 'who_we_are' %}">Who We Are</a>
+        <a href="{% url 'what_we_do' %}">What We Do</a>
+        <a href="{% url 'our_core' %}">Our Core</a>
+        <a href="{% url 'our_team' %}">Our Team</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block hero_slides %}
+<!-- Slide 1: Contact Us -->
+<div class="hero-slide active" style="background-image: url('{% static 'images/hero21.jpg' %}');">
+    <div class="hero-content">
+        <h1 class="title">Get In <span class="keyword">Touch</span></h1>
+        <p>We'd love to hear from you. Reach out to us and let's work together to make a difference in children's lives.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'sign_up' %}" class="btn btn-primary">Get Involved</a>
+            <a href="{% url 'about' %}" class="btn btn-secondary">Learn More</a>
+        </div>
+    </div>
+</div>
+<!-- Slide 2: Contact Methods -->
+<div class="hero-slide" style="background-image: url('{% static 'images/hero22.jpg' %}');">
+    <div class="hero-content">
+        <h1 class="title">We're Just a <span class="keyword">Call Away</span></h1>
+        <p>Whether you have questions about our programs, want to volunteer, or need support - our team is here to help.</p>
+        <div class="hero-buttons">
+            <a href="tel:+254714197684" class="btn btn-primary">Call Us Now</a>
+            <a href="mailto:info.hopecarecenter@gmail.com" class="btn btn-secondary">Email Us</a>
+        </div>
+    </div>
+</div>
+<!-- Slide 3: Visit Us -->
+<div class="hero-slide" style="background-image: url('{% static 'images/hero23.jpg' %}');">
+    <div class="hero-content">
+        <h1 class="title">Visit Our <span class="keyword">Center</span></h1>
+        <p>Our doors are open Monday through Friday, 8:00 AM - 5:00 PM. Come and see the difference we're making in children's lives.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'our_team' %}" class="btn btn-primary">Meet Our Team</a>
+            <a href="{% url 'what_we_do' %}" class="btn btn-secondary">What We Do</a>
+        </div>
+    </div>
+</div>
+<!-- Slide 4: Get Involved -->
+<div class="hero-slide" style="background-image: url('{% static 'images/hero24.jpg' %}');">
+    <div class="hero-content">
+        <h1 class="title">Join Our <span class="keyword">Mission</span></h1>
+        <p>Your support can change a child's life. Whether through volunteering, donations, or spreading the word - every action counts.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'sign_up' %}" class="btn btn-primary">Become a Volunteer</a>
+            <a href="{% url 'contact' %}#contact-form" class="btn btn-secondary">Send a Message</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Contact Section */
+    .contact-section {
+        padding: 5rem 5%;
+        background-color: #f5f5f5;
+    }
+    
+    .contact-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .contact-block {
+        background: white;
+        padding: 3rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    
+    .contact-block h2 {
+        font-size: 2rem;
+        color: #e53935;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-block p {
+        font-size: 1.1rem;
+        color: #7b1fa2;
+        margin-bottom: 1rem;
+        line-height: 1.8;
+    }
+    
+    /* Contact Info Cards */
+    .contact-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .contact-card {
+        background: #e8f5e9;
+        padding: 2rem;
+        border-radius: 12px;
+        text-align: center;
+        transition: transform 0.3s;
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .contact-card h3 {
+        color: #2e7d32;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+    }
+    
+    .contact-card p {
+        color: #555;
+        margin-bottom: 0.5rem;
+    }
+    
+    .contact-card a {
+        color: #1b5e20;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    
+    .contact-card a:hover {
+        color: #e53935;
+    }
+    
+    .contact-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Contact Form */
+    .contact-form {
+        margin-top: 2rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #2e7d32;
+    }
+    
+    .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+    
+    .submit-btn {
+        background-color: #2e7d32;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .submit-btn:hover {
+        background-color: #1b5e20;
+    }
+    
+    /* Alert Messages */
+    .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .alert-success {
+        background-color: #c8e6c9;
+        color: #2e7d32;
+        border: 1px solid #a5d6a7;
+    }
+    
+    .alert-success p {
+        margin: 0;
+        color: #2e7d32;
+    }
+    
+    @media (max-width: 768px) {
+        .contact-block {
+            padding: 2rem;
+        }
+        
+        .contact-info-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="contact-container">
+        <div class="contact-block">
+            <h2>Contact Hopecare Center</h2>
+            <p>We're here to answer any questions you may have about our programs, volunteering opportunities, or how you can support our mission. Reach out to us through any of the methods below or fill out the contact form.</p>
+            
+            <div class="contact-info-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3>Phone</h3>
+                    <p><a href="tel:+254714197684">+254714197684</a></p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info.hopecarecenter@gmail.com">info.hopecarecenter@gmail.com</a></p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>Location</h3>
+                    <p>Nairobi, Kenya</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🕐</div>
+                    <h3>Office Hours</h3>
+                    <p>Monday - Friday</p>
+                    <p>8:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-block" id="contact-form">
+            <h2>Send Us a Message</h2>
+            {% if messages %}
+            <div class="alert alert-success">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <form class="contact-form" method="post" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" value="{{ form.name.value|default:'' }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" value="{{ form.email.value|default:'' }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="What is this about?" value="{{ form.subject.value|default:'' }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Write your message here..." required>{{ form.message.value|default:'' }}</textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+        
+        <!-- Volunteer Section -->
+        <div class="contact-block">
+            <h2>Volunteer With Hopecare</h2>
+            <p>At Hopecare Center, volunteers are the heart of our organization. Your dedication and compassion directly impact the lives of children who need it most.</p>
+            
+            <h3 style="color: #2e7d32; margin: 1.5rem 0 1rem;">Why Volunteer?</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✓ Make a meaningful impact in children's lives</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✓ Gain valuable experience in a charitable environment</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✓ Join a supportive and passionate community</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✓ Develop new skills and build your network</li>
+                <li style="padding: 0.5rem 0;">✓ Flexible scheduling to fit your availability</li>
+            </ul>
+            
+            <h3 style="color: #2e7d32; margin: 1.5rem 0 1rem;">Volunteer Opportunities</h3>
+            <div class="contact-info-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📚</div>
+                    <h3>Tutoring & Education</h3>
+                    <p>Help children with their studies and homework assistance</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🎨</div>
+                    <h3>Arts & Crafts</h3>
+                    <p>Lead creative activities and fun projects</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🏃</div>
+                    <h3>Sports & Recreation</h3>
+                    <p>Organize sports activities and games</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <h3>Administrative Support</h3>
+                    <p>Help with office tasks and event planning</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="{% url 'sign_up' %}" class="submit-btn">Apply to Volunteer</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
