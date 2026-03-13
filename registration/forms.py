@@ -127,7 +127,8 @@ class VolunteerStep3Form(forms.Form):
     how_did_you_hear = forms.ChoiceField(
         choices=HEAR_CHOICES,
         required=True,
-        label="How did you hear about the volunteer program at Hopecare Center?"
+        label="How did you hear about the volunteer program at Hopecare Center?",
+        widget=forms.Select(attrs={'class': 'form-select'})
     )
     how_did_you_hear_other = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Please specify'}),
@@ -165,7 +166,8 @@ class VolunteerStep5Form(forms.Form):
     volunteer_interest = forms.ChoiceField(
         choices=VOLUNTEER_CHOICES,
         required=True,
-        label="Type of volunteer work that interests you"
+        label="Type of volunteer work that interests you",
+        widget=forms.Select(attrs={'class': 'form-select'})
     )
     volunteer_interest_other = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Please specify'}),
