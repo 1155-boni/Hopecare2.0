@@ -156,3 +156,28 @@ class VolunteerApplication(models.Model):
     
     def __str__(self):
         return f"Volunteer Application - {self.user.username}"
+
+
+class TeamMember(models.Model):
+    """Model for team members to enable admin image uploads."""
+    name = models.CharField(max_length=100, verbose_name="Full Name")
+    role = models.CharField(max_length=100, verbose_name="Role/Position")
+    bio = models.TextField(verbose_name="Bio/Description", help_text="Short bio shown on team page")
+    photo = models.ImageField(
+        upload_to='team/',
+        verbose_name="Photo",
+        help_text="Upload team member photo (recommended: 400x400px, square crop)"
+    )
+    order = models.PositiveIntegerField(default=0, verbose_name="Display Order")
+    is_active = models.BooleanField(default=True, verbose_name="Is Active")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name = "Team Member"
+        verbose_name_plural = "Team Members"
+        ordering = ['order', 'id']
+    
+    def __str__(self):
+        return self.name
+
