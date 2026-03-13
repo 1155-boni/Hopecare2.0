@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import VolunteerApplication, ContactMessage
+from .models import VolunteerApplication, ContactMessage, TeamMember
 
 
 @admin.register(ContactMessage)
@@ -62,3 +62,30 @@ class VolunteerApplicationAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('name', 'role', 'is_active', 'order', 'created_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('name', 'role', 'bio')
+    list_editable = ('is_active', 'order')
+    readonly_fields = ('created_at',)
+    ordering = ('order', 'id')
+    
+    fieldsets = (
+        ('Team Member Info', {
+            'fields': ('name', 'role')
+        }),
+        ('Photo & Bio', {
+            'fields': ('photo', 'bio')
+        }),
+        ('Display Settings', {
+            'fields': ('order', 'is_active')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at',),
+            'classes': ('collapse',)
+        }),
+    )
+
