@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import *
@@ -82,7 +81,7 @@ def sign_up(request):
             form = VolunteerStep3Form(form_data)
             if form.is_valid():
                 request.session['volunteer_how_hear'] = form.cleaned_data['how_did_you_hear']
-                request.session['volunteer_how_hear_other'] = form.cleaned_data.get('how_did_you_hear_other', '')
+                request.session['volunteer_how_hear_other'] = form.cleaned_data.get('volunteer_how_hear_other', '')
                 request.session['volunteer_step'] = 4
                 return redirect('volunteer_register_step', step=4)
             else:
@@ -307,7 +306,9 @@ def our_core(request):
 
 def our_team(request):
     """Our Team page - accessible to all users"""
-    return render(request, 'our_team.html')
+    from .models import TeamMember
+    team_members = TeamMember.objects.filter(is_active=True).order_by('order')
+    return render(request, 'our_team.html', {'team_members': team_members})
 
 
 def contact(request):
@@ -328,6 +329,4 @@ def contact(request):
         form = ContactForm()
     
     return render(request, 'contact.html', {'form': form})
-
-
 
