@@ -1,6 +1,13 @@
-# Landing Page Slides Fix Plan
-- [x] Step 1: Edit templates/landing.html to standardize hero_slides block with 4 consistent slides (pure bg images hero25-28.jpg, no gradients, proper structure matching other pages)
-- [x] Step 2: Verify edit (read_file or manual check)
-- [x] Step 3: Test locally (runserver, view landing)
-- [x] Done: Task complete
+# Fix TeamMember Table Missing Error
 
+## Completed
+- [x] Install Pillow dependency
+
+## Pending  
+- [ ] Update requirements.txt (add Pillow==12.1.1)
+- [ ] python manage.py makemigrations registration
+- [ ] python manage.py migrate  
+- [ ] Verify python manage.py showmigrations registration (all [X])
+- [ ] Create superuser: python manage.py createsuperuser
+- [ ] Add TeamMembers at /admin/registration/teammember/add/
+- [ ] Test http://127.0.0.1:8000/our_team/
