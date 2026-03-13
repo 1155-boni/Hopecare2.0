@@ -148,6 +148,13 @@
         font-size: 0.95rem;
     }
     
+    .no-team-members {
+        text-align: center;
+        padding: 3rem;
+        color: #7b1fa2;
+        font-style: italic;
+    }
+    
     /* CTA Section */
     .cta-section {
         padding: 4rem 5%;
@@ -183,38 +190,21 @@
             <h2>Meet Our Team</h2>
             <p>Our team at Hopecare is composed of passionate individuals who are committed to making a difference in the lives of children. Each member brings unique skills and experiences to our organization.</p>
             <div class="team-grid">
+                {% for member in team_members %}
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face" alt="Sarah Johnson">
+                        <img src="{{ member.photo.url }}" alt="{{ member.name }}">
                     </div>
-                    <h3>Sarah Johnson</h3>
-                    <div class="role">Director</div>
-                    <p>Leading our mission with over 15 years of experience in child welfare.</p>
+                    <h3>{{ member.name }}</h3>
+                    <div class="role">{{ member.role }}</div>
+                    <p>{{ member.bio }}</p>
                 </div>
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" alt="Michael Chen">
-                    </div>
-                    <h3>Michael Chen</h3>
-                    <div class="role">Program Manager</div>
-                    <p>Coordinating our programs and ensuring quality care for all children.</p>
+                {% empty %}
+                <div class="no-team-members">
+                    <p>No team members available at the moment. Check back soon!</p>
+                    <a href="{% url 'admin:index' %}" class="btn btn-primary" style="margin-top: 1rem;">Admin: Add Team Members</a>
                 </div>
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face" alt="Emily Wambui">
-                    </div>
-                    <h3>Emily Wambui</h3>
-                    <div class="role">Head Caregiver</div>
-                    <p>Providing daily care and support to children in our residential program.</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" alt="David Okonkwo">
-                    </div>
-                    <h3>David Okonkwo</h3>
-                    <div class="role">Education Coordinator</div>
-                    <p>Ensuring every child has access to quality education and learning resources.</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
         
