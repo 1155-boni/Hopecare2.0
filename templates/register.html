@@ -7,12 +7,95 @@
 <style>
     /* Form Container */
     .form-page {
-        padding: 8rem 5% 5rem;
+        padding: 4rem 5% 3rem;
         min-height: 100vh;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
         background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    }
+
+    /* New Two-Column Layout */
+    .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        align-items: start;
+    }
+
+    .left-content {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        height: fit-content;
+    }
+
+    .volunteer-highlight h2 {
+        color: #2e7d32;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+    }
+
+    .volunteer-highlight p {
+        color: #333;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .volunteer-highlight ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 2rem;
+    }
+
+    .volunteer-highlight li {
+        padding: 0.75rem 0;
+        font-size: 1.05rem;
+        color: #444;
+        position: relative;
+        padding-left: 2rem;
+    }
+
+    .volunteer-highlight li:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.9rem;
+        width: 12px;
+        height: 12px;
+        background: #4caf50;
+        border-radius: 50%;
+    }
+
+    .cta-box {
+        background: linear-gradient(135deg, #2e7d32, #4caf50);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    .cta-box h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.3rem;
+    }
+
+    .cta-box p {
+        margin: 0;
+        opacity: 0.95;
+        font-size: 1rem;
+    }
+
+    .right-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-wrapper {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 0;
     }
     
     .form-wrapper {
@@ -166,7 +249,6 @@
     .form-group input[type="text"],
     .form-group input[type="email"],
     .form-group input[type="password"],
-    .form-group select,
     .form-group textarea {
         width: 100%;
         padding: 0.75rem;
@@ -174,7 +256,44 @@
         border-radius: 8px;
         font-size: 1rem;
         font-family: inherit;
-        transition: border-color 0.3s;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    
+    /* Custom Select Dropdown Styling */
+    .form-group select.form-select {
+        width: 100%;
+        padding: 0.75rem 2.5rem 0.75rem 0.75rem; /* Space for arrow */
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: inherit;
+        background-color: white;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.75rem center;
+        background-repeat: no-repeat;
+        background-size: 1.5em 1.5em;
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-height: 3rem;
+    }
+    
+    .form-group select.form-select:hover {
+        border-color: #2e7d32;
+        box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+    }
+    
+    .form-group select.form-select:focus {
+        outline: none;
+        border-color: #2e7d32;
+        box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+    }
+    
+    .form-group select.form-select option {
+        padding: 0.5rem;
+        background: white;
+        color: #333;
     }
     
     .form-group textarea {
@@ -327,7 +446,22 @@
         gap: 1rem;
     }
     
+@media (max-width: 900px) {
+        .content-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .left-content {
+            order: -1;
+        }
+    }
+
     @media (max-width: 600px) {
+        .form-page {
+            padding: 2rem 5% 2rem;
+        }
+        
         .form-row {
             grid-template-columns: 1fr;
         }
@@ -340,13 +474,40 @@
         .step-indicator {
             display: none;
         }
+        
+        .left-content {
+            padding: 2rem;
+        }
+        
+        .volunteer-highlight h2 {
+            font-size: 1.6rem;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="form-page">
-    <div class="form-wrapper">
+    <div class="content-grid">
+        <div class="left-content">
+            <div class="volunteer-highlight">
+                <h2>Join Our Volunteer Family at Hopecare</h2>
+                <p>Make a meaningful difference in the lives of children and families in our community.</p>
+                <ul>
+                    <li>🕒 Flexible hours that fit your schedule</li>
+                    <li>👨‍👩‍👧‍👦 Work directly with children and families</li>
+                    <li>💚 Comprehensive training and support</li>
+                    <li>🌟 Join a supportive community of volunteers</li>
+                    <li>📈 Gain valuable experience and skills</li>
+                </ul>
+                <div class="cta-box">
+                    <h3>Ready to make a difference?</h3>
+                    <p>Complete the form on the right to join our volunteer team today!</p>
+                </div>
+            </div>
+        </div>
+        <div class="right-form">
+            <div class="form-wrapper">
         <!-- Confidential Notice -->
         <div class="confidential-notice">
             <h3>We need your help!</h3>
@@ -603,8 +764,9 @@
         <div class="form-links">
             <p>Already have an account? <a href="{% url 'sign_in' %}">Sign In</a></p>
         </div>
+        </div>
+        </div>
     </div>
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
